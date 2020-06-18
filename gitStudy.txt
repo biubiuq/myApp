@@ -1,0 +1,44 @@
+$ git config --global user.name "biubiuq"
+$ git config --global user.email  '495068093@qq.com'     --》git安装之后先注册用户名和账号
+
+git init           -------初始化仓库
+
+git commit -m "wrote a readme file"  --提交更改的任务 -m后面是任何内容
+git status    -------------------检查仓库的状态
+
+git diff      -----------------查看修改的不同
+
+git log      -----------------查看每次更新的不同 
+
+-----------如果我们想退到上个版本该如何做
+首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交1094adb...
+（注意我的提交ID和你的肯定不一样），
+上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+
+git reset --hard HEAD^    ------------回退到上个版本
+
+ git reflog    ----------查看所有命令
+
+用git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别：
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+rm test.txt      ------删除文件从git管理的本地
+是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：   
+
+git rm test.txt   ----从版本库里面删除文件    git commit -m'删除文件'  提交删除
+----------由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，   要连接github必须要设置SSH加密
+ssh-keygen -t rsa -C "495068093@qq.com"
+
+------------------------------------------------------------>添加本地和github上面的远程库
+git remote add origin git@github.com:biubiuq/myApp.git
+---------------------------------------------------------->本地库的所有内容推送到远程库上：
+git push -u origin master    ------建立新库的时候合并代码
+git push origin master  --------提交本地版本到新库
+git pull --rebase origin master  -------将两个版本的库合并成一个库
+
+git clone git@github.com:michaelliao/gitskills.git  --------克隆一个从github上下载的库
